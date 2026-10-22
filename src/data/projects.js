@@ -33,7 +33,7 @@ export const projects = [
     logos: ['python', 'discordpy', 'gemini', 'groq', 'sqlite', 'duckduckgo'],
     features: [
       'Chat lewat prefix #, dengan verifikasi password via DM',
-      'Router tiga jalur (Groq, Gemini, Gemini + Google Search + DuckDuckGo) dengan cadangan ke WebSearch DuckDuckGo jika Gemini search limit',
+      'Router empat jalur (Groq, Gemini, Gemini + Google Search + DuckDuckGo) dengan cadangan ke WebSearch DuckDuckGo jika Gemini search limit',
       'Penyimpanan memory dan riwayat percakapan di SQLite',
       'Pencarian web untuk pertanyaan yang butuh informasi terbaru',
       'Pesan terjadwal lintas server dan sambutan member join/keluar',
