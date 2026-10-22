@@ -26,14 +26,14 @@ export const projects = [
     image: '/images/projects/algi-asisten.png',
     imageAlt: 'Tampilan bot Discord ALGI ASISTEN (placeholder sampai gambar asli ditambahkan)',
     description:
-      'Bot Discord berbasis LLM berbahasa Indonesia. Sistem routing memilih model yang sesuai untuk tiap pertanyaan (Groq, Gemini, atau Gemini dengan Google Search), sementara database SQLite menyimpan identitas pengguna, memory, dan riwayat percakapan.',
+      'Bot Discord berbasis LLM berbahasa Indonesia. Sistem routing memilih model yang sesuai untuk tiap pertanyaan (Groq, Gemini, atau Gemini dengan Google Search dan WebSearch DuckDuckGo), sementara database SQLite menyimpan identitas pengguna, memory, dan riwayat percakapan.',
     goal:
       'Membuat asisten di server Discord yang bisa dipakai teman-teman sehari-hari, sekaligus belajar merancang sistem yang menggabungkan lebih dari satu LLM, database, dan penanganan kegagalan API.',
     tech: ['Python', 'discord.py', 'Google Gemini', 'Groq', 'SQLite', 'DuckDuckGo Search'],
     logos: ['python', 'discordpy', 'gemini', 'groq', 'sqlite', 'duckduckgo'],
     features: [
       'Chat lewat prefix #, dengan verifikasi password via DM',
-      'Router tiga jalur (Groq, Gemini, Gemini + Google Search) dengan cadangan ke Gemini jika Groq gagal',
+      'Router tiga jalur (Groq, Gemini, Gemini + Google Search + DuckDuckGo) dengan cadangan ke WebSearch DuckDuckGo jika Gemini search limit',
       'Penyimpanan memory dan riwayat percakapan di SQLite',
       'Pencarian web untuk pertanyaan yang butuh informasi terbaru',
       'Pesan terjadwal lintas server dan sambutan member join/keluar',
