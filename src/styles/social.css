@@ -1,0 +1,35 @@
+/* Tautan sosial (Instagram, WhatsApp, Discord, dst.): bereaksi saat kursor menyentuh,
+   saat fokus keyboard, dan saat ditekan jari di HP.
+   File ini dimuat SETELAH global.css, jadi aturannya menimpa gaya dasar di sana. */
+
+.social__instagram { --brand: #e1306c; }
+.social__whatsapp  { --brand: #25d366; }
+.social__discord   { --brand: #5865f2; }
+
+.social { gap: 0.5rem 0.5rem; }
+.social a {
+  padding: 0.6rem 0.7rem; /* area sentuh lebih besar di HP */
+  border: 1px solid var(--line);
+  transition: color 0.2s, border-color 0.2s, background-color 0.2s, transform 0.2s;
+}
+.social a svg { transition: transform 0.2s; }
+
+/* Kursor menyentuh / fokus keyboard / ditekan (mouse atau jari) */
+.social a:is(:hover, :focus-visible, :active) {
+  animation: none; /* hentikan animasi warna, pakai warna platform yang solid */
+  color: var(--brand, var(--lime));
+  border-color: var(--brand, var(--lime));
+  background-color: color-mix(in srgb, var(--brand, var(--lime)) 14%, transparent);
+  transform: translateY(-3px);
+}
+.social a:is(:hover, :focus-visible, :active) svg { transform: scale(1.2); }
+
+/* Saat benar-benar ditekan: sedikit "tenggelam" supaya terasa ada respons */
+.social a:active { transform: translateY(0) scale(0.97); }
+
+.social a:focus-visible { outline: none; } /* tanda fokus sudah diwakili border + warna */
+
+@media (prefers-reduced-motion: reduce) {
+  .social a:is(:hover, :focus-visible, :active) { transform: none; }
+  .social a:is(:hover, :focus-visible, :active) svg { transform: none; }
+}

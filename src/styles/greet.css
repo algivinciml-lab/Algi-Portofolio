@@ -1,0 +1,64 @@
+/* Foto + balon sapaan (muncul saat foto disentuh kursor / ditekan di layar sentuh) */
+.greet { cursor: default; }
+
+.greet__btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: default;
+  line-height: 0;
+}
+.greet__btn:focus-visible { outline: 2px solid var(--lime); outline-offset: 6px; }
+
+/* Balon sapaan: muncul DI LUAR bingkai, di atas pojok kanan atas foto */
+.greet__bubble {
+  position: absolute;
+  bottom: calc(100% + 24px);
+  right: -14px; /* sejajar dengan sudut luar bingkai */
+  z-index: 5;
+  transform: translateY(8px);
+  padding: 0.5rem 0.9rem;
+  background: var(--lime);
+  color: var(--lime-ink);
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+.greet__bubble.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+/* Ekor balon, menunjuk ke foto */
+.greet__bubble::after {
+  content: '';
+  position: absolute;
+  right: 18px;
+  top: 100%;
+  border: 7px solid transparent;
+  border-top-color: var(--lime);
+}
+
+/* ---- Respons sentuhan (HP/tablet) ----
+   Di layar sentuh tidak ada "hover", jadi efek yang sama diberikan saat jari menekan (:active).
+   touch-action: manipulation menghilangkan jeda ketukan agar terasa cepat. */
+a, button { touch-action: manipulation; }
+
+@media (hover: none), (max-width: 900px) {
+  .btn:active { transform: translate(-2px, -2px); }
+  .btn--primary:active { box-shadow: 4px 4px 0 var(--offwhite); }
+  .btn--ghost:active { background: var(--offwhite); color: var(--charcoal); }
+  .social a:active { color: var(--lime); }
+  .navbar__nav a:active { color: var(--offwhite); }
+  .portfolio__filters button:active { border-color: var(--offwhite); }
+  .contact__links a:active { border-color: var(--lime); color: var(--lime); transform: translate(-2px, -2px); }
+  .skills__group:active { border-color: var(--lime); }
+}

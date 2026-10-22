@@ -1,0 +1,12 @@
+.contact { padding-block: clamp(2.5rem, 7vw, 5rem) 0; }
+.contact__head h1 { font-size: clamp(3rem, 10vw, 7rem); letter-spacing: -0.045em; margin-top: 1rem; }
+.contact__head h1 span { color: var(--lime); }
+.contact__lead { color: var(--muted); max-width: 34rem; margin-top: 1.25rem; }
+
+/* Tautan kontak: satu kartu per platform, mengisi lebar halaman */
+.contact__links { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1.25rem; margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+.contact__links a { display: grid; grid-template-columns: auto 1fr auto; gap: 1.1rem; align-items: center; height: 100%; padding: clamp(1.25rem, 3vw, 1.75rem); background: var(--charcoal-2); border: 1.5px solid var(--line); text-decoration: none; transition: border-color 0.2s, color 0.2s, transform 0.2s; }
+.contact__links a:hover { border-color: var(--lime); color: var(--lime); transform: translate(-2px, -2px); }
+.contact__link-text { display: grid; gap: 0.2rem; min-width: 0; overflow-wrap: anywhere; font-size: 1.05rem; }
+
+@media (prefers-reduced-motion: reduce) { .contact__links a:hover { transform: none; } }

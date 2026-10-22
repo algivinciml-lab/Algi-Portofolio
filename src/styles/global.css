@@ -1,0 +1,135 @@
+:root {
+  --charcoal: #151714;
+  --charcoal-2: #1d201b;
+  --line: #2e332b;
+  --offwhite: #f3f3ea;
+  --muted: #a0a598;
+  --lime: #c5e878;
+  --lime-ink: #151714;
+  --gold: #d4af37;
+
+  --font-head: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --container: 1200px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --nav-h: 72px;
+
+  /* Bingkai shadow emas untuk foto profil */
+  --gold-frame:
+    0 0 0 2px var(--gold),
+    0 0 0 7px rgba(212, 175, 55, 0.22),
+    0 14px 44px rgba(212, 175, 55, 0.38);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--charcoal);
+  color: var(--offwhite);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--font-head); line-height: 1.05; margin: 0; letter-spacing: -0.02em; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+figure { margin: 0; }
+button, input, textarea { font: inherit; color: inherit; }
+code { font-family: var(--font-mono); }
+
+:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+::selection { background: var(--lime); color: var(--lime-ink); }
+
+.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+.mono { font-family: var(--font-mono); }
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 100;
+  background: var(--lime); color: var(--lime-ink); padding: 0.6rem 1rem; font-weight: 600;
+}
+.skip-link:focus { top: 1rem; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.8rem 1.25rem; border: 1.5px solid var(--offwhite);
+  font-weight: 600; font-size: 0.95rem; text-decoration: none; cursor: pointer;
+  background: transparent; transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+}
+.btn:hover { transform: translate(-2px, -2px); }
+.btn--primary { background: var(--lime); border-color: var(--lime); color: var(--lime-ink); }
+.btn--primary:hover { box-shadow: 4px 4px 0 var(--offwhite); }
+.btn--ghost:hover { background: var(--offwhite); color: var(--charcoal); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* Section heading */
+.section-heading { margin-bottom: clamp(2rem, 5vw, 3.5rem); max-width: 40rem; }
+.section-heading h2 { font-size: clamp(2rem, 5vw, 3.25rem); margin-top: 0.75rem; }
+.section-heading__index { color: var(--lime); margin-right: 0.75rem; }
+.section-heading__lead { color: var(--muted); margin-top: 1rem; max-width: 34rem; }
+
+/* Tags */
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tags li {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  border: 1px solid var(--line); padding: 0.2rem 0.55rem; color: var(--offwhite);
+}
+
+/* Social */
+.social { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+.social a { display: inline-flex; align-items: center; gap: 0.45rem; text-decoration: none; color: var(--muted); font-size: 0.9rem; transition: color 0.2s; }
+.social a:hover { color: var(--lime); }
+
+/* Ikon dan tulisan berganti warna dengan halus, memakai warna tiap platform.
+   Warna awal dan akhir sama, jadi putarannya tidak terlihat "loncat". */
+.social__instagram { animation: warna-instagram 7s ease-in-out infinite; }
+.social__whatsapp  { animation: warna-whatsapp 7s ease-in-out infinite; animation-delay: -2.3s; }
+.social__discord   { animation: warna-discord 7s ease-in-out infinite; animation-delay: -4.6s; }
+.social a.social__instagram:hover, .social a.social__whatsapp:hover, .social a.social__discord:hover { animation-play-state: paused; }
+
+@keyframes warna-instagram { 0%, 100% { color: #e1306c; } 33% { color: #f77737; } 66% { color: #833ab4; } }
+@keyframes warna-whatsapp  { 0%, 100% { color: #25d366; } 50% { color: #128c7e; } }
+@keyframes warna-discord   { 0%, 100% { color: #5865f2; } 50% { color: #7289da; } }
+
+/* Footer */
+.footer { border-top: 1px solid var(--line); margin-top: clamp(5rem, 10vw, 9rem); padding-top: 3rem; }
+.footer__inner { display: grid; gap: 2rem; grid-template-columns: 1.2fr 1fr 1fr; align-items: start; }
+.footer__brand { font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.02em; }
+.footer__brand span, .navbar__logo span { color: var(--lime); }
+.footer__note { color: var(--muted); font-size: 0.9rem; margin-top: 0.4rem; }
+.footer__nav { display: grid; gap: 0.4rem; }
+.footer__nav a { text-decoration: none; color: var(--muted); }
+.footer__nav a:hover { color: var(--offwhite); }
+.footer .social { flex-direction: column; }
+.footer__legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; padding-block: 2rem 2.5rem; color: var(--muted); }
+
+/* Entrance animation (fungsional, singkat) */
+.reveal { animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: var(--d, 0ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 760px) {
+  .footer__inner { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .btn:hover { transform: none; }
+  /* Tanpa animasi: tampil dengan warna tetap tiap platform */
+  .social__instagram { color: #e1306c; }
+  .social__whatsapp  { color: #25d366; }
+  .social__discord   { color: #5865f2; }
+}

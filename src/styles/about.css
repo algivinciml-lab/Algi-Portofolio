@@ -1,0 +1,66 @@
+.about { padding-block: clamp(2.5rem, 7vw, 5rem) 0; }
+.about__intro { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.about__art { justify-self: end; width: min(100%, 440px); }
+.about__art .coder { display: block; width: 100%; height: auto; }
+
+/* Simbol kode melayang pelan (otomatis mati jika pengunjung mematikan animasi) */
+.coder__float text { animation: coder-melayang 5s ease-in-out infinite; }
+.coder__float .coder__float--b { animation-delay: -1.6s; }
+.coder__float .coder__float--c { animation-delay: -3.2s; }
+@keyframes coder-melayang { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.about__intro h1 { font-size: clamp(2.5rem, 7vw, 5rem); margin-top: 1rem; letter-spacing: -0.04em; }
+.about__intro h1 span { display: block; color: var(--muted); }
+
+/* Judul bergantian putih dan hijau stabilo, mengalir dari atas ke bawah.
+   Satu pola = setengah tinggi judul, jadi putarannya mulus tanpa "loncat". */
+.about__intro h1 {
+  background-image: linear-gradient(180deg, var(--offwhite), var(--lime), var(--offwhite));
+  background-size: 100% 50%;
+  background-repeat: repeat-y;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: judul-mengalir 6s linear infinite;
+}
+@keyframes judul-mengalir {
+  from { background-position: 0 0; }
+  to   { background-position: 0 100%; }
+}
+/* Tanpa animasi: kembali ke tampilan semula (putih dan abu-abu) */
+@media (prefers-reduced-motion: reduce) {
+  .about__intro h1 { background: none; -webkit-text-fill-color: currentColor; }
+  .about__intro h1 span { -webkit-text-fill-color: var(--muted); }
+}
+.about__lead { margin-top: 1.5rem; max-width: 32rem; font-size: 1.1rem; }
+.about__lead strong { color: var(--lime); font-weight: 600; }
+
+.about__block { padding-top: clamp(4rem, 9vw, 7rem); }
+.about__prose { max-width: 40rem; display: grid; gap: 1.25rem; font-size: 1.05rem; }
+.about__prose-lg { font-family: var(--font-head); font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.3; max-width: 42rem; margin-bottom: 2rem; font-weight: 500; }
+
+.learning { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid var(--line); }
+.learning li { padding: 1.5rem 1.5rem 1.5rem 0; border-bottom: 1px solid var(--line); }
+.learning h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+.learning p { color: var(--muted); font-size: 0.95rem; }
+
+/* Technical skills: satu kotak per kategori (Frontend, Backend, dst.) */
+.skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; align-items: stretch; }
+.skills__group { display: flex; flex-direction: column; background: var(--charcoal-2); border: 1.5px solid var(--line); padding: clamp(1.1rem, 2.5vw, 1.75rem); transition: border-color 0.2s; }
+.skills__group:hover { border-color: var(--lime); }
+.skills__group h3 { margin-bottom: 0.5rem; padding-bottom: 0.9rem; color: var(--lime); border-bottom: 1.5px solid var(--lime); }
+.skills__group li { display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding-block: 0.7rem; border-bottom: 1px solid var(--line); }
+.skills__group li:last-child { border-bottom: 0; }
+/* Jika jumlah kotak ganjil, kotak terakhir melebar penuh agar tidak ada ruang kosong */
+.skills__group:last-child:nth-child(odd) { grid-column: 1 / -1; }
+/* Kotak yang melebar penuh: daftar dibagi dua kolom supaya tidak terlalu panjang */
+.skills__group:last-child:nth-child(odd) ul { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2.5rem; }
+.skills__note { margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--line); color: var(--muted); font-size: 0.92rem; max-width: 46rem; }
+.level { font-family: var(--font-mono); font-size: 0.7rem; padding: 0.15rem 0.55rem; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.level--used { border-color: var(--lime); color: var(--lime); }
+
+@media (max-width: 800px) {
+  .about__intro { grid-template-columns: 1fr; }
+  .about__art { justify-self: center; width: min(100%, 320px); }
+  .learning, .skills { grid-template-columns: 1fr; }
+  .skills__group:last-child:nth-child(odd) ul { grid-template-columns: 1fr; }
+}

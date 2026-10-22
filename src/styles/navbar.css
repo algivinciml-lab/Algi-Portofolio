@@ -1,0 +1,41 @@
+.navbar { position: sticky; top: 0; z-index: 50; background: rgba(21, 23, 20, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.navbar__inner { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; }
+.navbar__logo { font-family: var(--font-head); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em; text-decoration: none; }
+
+/* Warna logo bergantian dengan halus: lime -> putih -> emas -> kembali ke lime.
+   Warna awal dan akhir sama, jadi putarannya tidak terlihat "loncat". */
+.navbar__logo {
+  color: var(--lime); /* cadangan jika browser tidak mendukung background-clip: text */
+  background-image: linear-gradient(90deg, var(--lime), var(--offwhite), var(--gold), var(--lime));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: logo-warna 8s linear infinite;
+}
+.navbar__logo span { -webkit-text-fill-color: var(--lime); } /* titik tetap lime */
+
+@keyframes logo-warna {
+  from { background-position: 0% 0; }
+  to   { background-position: 200% 0; }
+}
+
+/* Untuk pengunjung yang mematikan animasi: tampil statis, putih biasa. */
+@media (prefers-reduced-motion: reduce) {
+  .navbar__logo { animation: none; background-image: none; -webkit-text-fill-color: var(--offwhite); color: var(--offwhite); }
+}
+.navbar__nav ul { display: flex; gap: 2rem; }
+.navbar__nav a { display: inline-flex; gap: 0.5rem; align-items: baseline; text-decoration: none; padding: 0.4rem 0; color: var(--muted); font-weight: 500; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
+.navbar__nav a:hover { color: var(--offwhite); }
+.navbar__nav a.is-active { color: var(--offwhite); border-bottom-color: var(--lime); }
+.navbar__num { font-family: var(--font-mono); font-size: 0.68rem; color: var(--lime); }
+.navbar__toggle { display: none; background: none; border: 1.5px solid var(--line); padding: 0.5rem; cursor: pointer; line-height: 0; }
+
+@media (max-width: 760px) {
+  .navbar__toggle { display: inline-flex; }
+  .navbar__nav { position: absolute; inset: var(--nav-h) 0 auto 0; background: var(--charcoal); border-bottom: 1px solid var(--line); display: none; padding: 1rem var(--gutter) 1.5rem; }
+  .navbar__nav.is-open { display: block; }
+  .navbar__nav ul { flex-direction: column; gap: 0.25rem; }
+  .navbar__nav a { width: 100%; padding: 0.9rem 0; font-size: 1.25rem; font-family: var(--font-head); border-bottom: 1px solid var(--line); }
+  .navbar__nav a.is-active { border-bottom-color: var(--lime); }
+}

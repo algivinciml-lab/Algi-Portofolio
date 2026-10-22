@@ -1,0 +1,119 @@
+.portfolio { padding-block: clamp(2.5rem, 7vw, 5rem) 0; }
+.portfolio__head h1 { font-size: clamp(3rem, 10vw, 7rem); letter-spacing: -0.045em; margin-top: 1rem; }
+.portfolio__lead { color: var(--muted); max-width: 34rem; margin-top: 1.25rem; }
+
+.portfolio__filters { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-block: 2.5rem 3rem; padding-block: 1rem; border-block: 1px solid var(--line); }
+.portfolio__filters button { background: none; border: 1.5px solid var(--line); padding: 0.45rem 1rem; cursor: pointer; font-size: 0.9rem; transition: border-color 0.2s, background 0.2s; }
+.portfolio__filters button:hover { border-color: var(--offwhite); }
+.portfolio__filters button.is-active { background: var(--lime); border-color: var(--lime); color: var(--lime-ink); font-weight: 600; }
+.portfolio__count { margin-left: auto; color: var(--muted); font-size: 0.78rem; }
+
+.portfolio__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3rem); align-items: start; }
+
+/* Project card (dipakai di Home dan Portfolio) */
+.project { display: flex; flex-direction: column; gap: 1.25rem; }
+
+/* Bingkai tipis neon keemasan: hanya di halaman Portfolio (kartu penuh), agar tiap project
+   mudah dibedakan. Kartu ringkas di Home tidak diberi bingkai. */
+.project:not(.project--compact) {
+  padding: 1.25rem;
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.08),
+    0 0 14px rgba(212, 175, 55, 0.22),
+    inset 0 0 18px rgba(212, 175, 55, 0.07);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.project:not(.project--compact):hover {
+  border-color: var(--gold);
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.18),
+    0 0 22px rgba(212, 175, 55, 0.4),
+    inset 0 0 22px rgba(212, 175, 55, 0.1);
+}
+
+.project__media { position: relative; overflow: hidden; aspect-ratio: 16 / 10; background: var(--charcoal-2); border: 1px solid var(--line); }
+.project__media img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.5s ease; }
+.project:hover .project__media img { transform: scale(1.03); }
+
+/* Logo library yang melayang di atas gambar project */
+.project__logos {
+  position: absolute; right: 0.65rem; bottom: 0.65rem; z-index: 2;
+  display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.35rem;
+  max-width: calc(100% - 1.3rem);
+  margin: 0; padding: 0; list-style: none;
+  pointer-events: none; /* hanya chip yang menerima hover */
+}
+.project__logo { pointer-events: auto; }
+.project__logo-float {
+  display: inline-flex; align-items: center;
+  padding: 0.2rem;
+  background: rgba(21, 23, 20, 0.88);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+}
+.project__logo-icon {
+  display: grid; place-items: center;
+  width: 1.7rem; height: 1.7rem; border-radius: 50%;
+  color: var(--c);
+  background: rgba(255, 255, 255, 0.06);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+.project__logo-icon svg { display: block; }
+.project__logo-label {
+  max-width: 0; padding-inline: 0; overflow: hidden; opacity: 0; white-space: nowrap;
+  font-family: var(--font-mono); font-size: 0.72rem; color: #f3f3ea;
+  transition: max-width 0.3s ease, padding 0.3s ease, opacity 0.2s ease;
+}
+.project__logo:hover .project__logo-icon { transform: scale(1.12); background: rgba(255, 255, 255, 0.12); }
+.project__logo:hover .project__logo-label { max-width: 8.5rem; padding-inline: 0.45rem 0.6rem; opacity: 1; }
+
+/* Animasi hanya jika pengguna tidak mengaktifkan "reduce motion" (jika aktif, chip tampil diam) */
+@media (prefers-reduced-motion: no-preference) {
+  .project__logo { opacity: 0; transform: translateY(10px) scale(0.6); }
+  .project__logos.is-in .project__logo {
+    animation: p-logo-in 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.35) both;
+    animation-delay: calc(var(--i) * 130ms + 150ms);
+  }
+  .project__logo-float {
+    animation: p-logo-float 4.2s ease-in-out infinite alternate;
+    animation-delay: calc(var(--i) * -0.8s);
+  }
+}
+
+@keyframes p-logo-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.6); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes p-logo-float {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-4px); }
+}
+
+.project__body { display: grid; gap: 0.9rem; }
+.project__meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; }
+.project__status { color: var(--lime); }
+.project__name { font-size: clamp(1.6rem, 3vw, 2.25rem); }
+.project__desc { color: #d8d9cf; }
+.project__details { display: grid; gap: 1rem; margin: 0.25rem 0; padding-top: 1rem; border-top: 1px solid var(--line); }
+.project__details dt { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lime); margin-bottom: 0.35rem; }
+.project__details dd { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.project__details dd ul { display: grid; gap: 0.3rem; }
+.project__details dd li { padding-left: 1rem; position: relative; }
+.project__details dd li::before { content: '→'; position: absolute; left: 0; color: var(--lime); }
+.project__actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem; }
+.project__more { display: inline-flex; align-items: center; gap: 0.35rem; width: fit-content; font-weight: 600; font-size: 0.9rem; color: var(--lime); text-decoration: none; border-bottom: 1px solid transparent; }
+.project__more:hover { border-bottom-color: var(--lime); }
+.project--compact .project__name { font-size: clamp(1.4rem, 2.6vw, 1.9rem); }
+
+@media (max-width: 860px) {
+  .project:not(.project--compact) { padding: 1rem; }
+  .portfolio__grid { grid-template-columns: 1fr; }
+  .portfolio__count { margin-left: 0; width: 100%; }
+}
+@media (max-width: 480px) {
+  .project__logos { right: 0.45rem; bottom: 0.45rem; gap: 0.25rem; }
+  .project__logo-icon { width: 1.5rem; height: 1.5rem; }
+}
